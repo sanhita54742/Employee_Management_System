@@ -284,25 +284,40 @@ public class Read extends javax.swing.JPanel {
 
     private void jbviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbviewActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = tableData.getSelectedRow();
-        if (selectedRowIndex<0) {
-            JOptionPane.showMessageDialog(this, "Select a roe to delete.");
+        int row = tableData.getSelectedRow();
+        if (row<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to delete.");
             return;
         }
         
         DefaultTableModel model = (DefaultTableModel) tableData.getModel();
-        Employee selectedEmployee = (Employee) model.getValueAt(selectedRowIndex, 0);
-        
-        txtName.setText(String.valueOf(selectedEmployee.getName()));
-        txtEmployeeID.setText(String.valueOf(selectedEmployee.getEmployeeID()));
-        txtAge.setText(String.valueOf(selectedEmployee.getAge()));
-        txtGender.setText(String.valueOf(selectedEmployee.getGender()));
-        txtStartDate.setText(String.valueOf(selectedEmployee.getStart_date()));
-        txtLevel.setText(String.valueOf(selectedEmployee.getLevel()));
-        txtTeamInfo.setText(String.valueOf(selectedEmployee.getTeam_Info()));
-        txtPositionTitle.setText(String.valueOf(selectedEmployee.getPosition_title()));
-        txtContactNumber.setText(String.valueOf(selectedEmployee.getCell_phone_number()));
-        txtEmailID.setText(String.valueOf(selectedEmployee.getEmail_address()));
+//        Employee selectedEmployee = (Employee) tableData.getModel().getValueAt(selectedRowIndex, 0);
+//model.getDataVector().elementAt(tableData.convertRowIndexToModel(tableData.getSelectedRow()));
+         String Name = (model.getValueAt(row, 0)).toString();
+         String EMPID = (model.getValueAt(row, 1)).toString();
+         String Age = (model.getValueAt(row, 2)).toString();
+         String Gender = (model.getValueAt(row, 3)).toString();
+         String StartDate = (model.getValueAt(row, 4)).toString();
+         
+         String Level = (model.getValueAt(row, 5)).toString();
+         String TeamInfo = (model.getValueAt(row, 6)).toString();
+         String Posi = (model.getValueAt(row, 7)).toString();
+         
+         String ContactNo = (model.getValueAt(row, 8)).toString();
+         String Email = (model.getValueAt(row, 9)).toString();
+//         String EMPID = (model.getValueAt(row, 9)).toString();
+         
+         System.out.println(EMPID);
+        txtName.setText(Name);
+        txtEmployeeID.setText(EMPID);
+        txtAge.setText(Age);
+        txtGender.setText(Gender);
+        txtStartDate.setText(StartDate);
+        txtLevel.setText(Level);
+        txtTeamInfo.setText(TeamInfo);
+        txtPositionTitle.setText(Posi);
+        txtContactNumber.setText(ContactNo);
+        txtEmailID.setText(Email);
         
     }//GEN-LAST:event_jbviewActionPerformed
 
@@ -316,6 +331,7 @@ public class Read extends javax.swing.JPanel {
        
         DefaultTableModel model = (DefaultTableModel) tableData.getModel();
        
+
         model.removeRow(tableData.getSelectedRow());
         JOptionPane.showMessageDialog(this, "Employee deleted.");
 //        
@@ -324,7 +340,10 @@ public class Read extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_jbDeleteActionPerformed
-
+//public void deleteEmployee(int row){
+//        
+//        
+//    }
     private void txtTeamInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTeamInfoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTeamInfoActionPerformed
