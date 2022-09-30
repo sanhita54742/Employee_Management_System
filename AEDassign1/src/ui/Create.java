@@ -6,6 +6,7 @@ package ui;
 
 import javax.swing.JOptionPane;
 import model.Employee;
+import model.EmployeeHistory;
 
 /**
  *
@@ -16,11 +17,11 @@ public class Create extends javax.swing.JPanel {
     /**
      * Creates new form Create
      */
-    Employee employee;
+    EmployeeHistory history;
     
-    public Create(Employee employee) {
+    public Create(EmployeeHistory history) {
         initComponents();
-        this.employee = employee;
+        this.history = history;
     }
 
     /**
@@ -132,7 +133,6 @@ public class Create extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblCreate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(135, 135, 135)
                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,7 +167,7 @@ public class Create extends javax.swing.JPanel {
                         .addGap(51, 51, 51)
                         .addComponent(lblEmail_ID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmailID, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                        .addComponent(txtEmailID, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                         .addGap(70, 70, 70))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
@@ -179,6 +179,10 @@ public class Create extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSave, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(289, 289, 289))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +211,7 @@ public class Create extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblStartDate))
-                .addGap(0, 1, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTeamInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,22 +269,45 @@ public class Create extends javax.swing.JPanel {
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
         // TODO add your handling code here:
         
+        String Name = txtName.getText();
+        int Age = Integer.parseInt(txtAge.getText());
+        String Gender = txtGender.getText();
+        String Level = txtLevel.getText();
+        String Position_title = txtPositionTitle.getText();
+        String Start_date = txtStartDate.getText();
+        int EmployeeID = Integer.parseInt(txtEmployeeID.getText());
+        String Team_Info = txtTeamInfo.getText();
+        int Cell_phone_number = Integer.parseInt(txtContactNumber.getText());
+        String Email_address = txtEmailID.getText();
         
-        employee.setName(txtName.getText());
-        employee.setAge(txtAge.getText());
-        employee.setGender(txtGender.getText());
-        employee.setLevel(txtLevel.getText());
-        employee.setPosition_title(txtPositionTitle.getText());
-        employee.setStart_date(txtStartDate.getText());
-        employee.setEmployeeID(txtEmployeeID.getText());
-        employee.setTeam_Info(txtTeamInfo.getText());
-        employee.setCell_phone_number(txtContactNumber.getText());
-        employee.setEmail_address(txtEmailID.getText());
+
+       
+        Employee emp = history.addNewEmployee();
+        emp.setName(Name);
+        emp.setAge(Age);
+        emp.setGender(Gender);
+        emp.setLevel(Level);
+        emp.setPosition_title(Position_title);
+        emp.setStart_date(Start_date);
+        emp.setEmployeeID(EmployeeID);
+        emp.setTeam_Info(Team_Info);
+        emp.setCell_phone_number(Cell_phone_number);
+        emp.setEmail_address(Email_address);
         
-        JOptionPane.showMessageDialog(this, "Employee Information Saved. ");
         
+        JOptionPane.showMessageDialog(this, "Employee Information added.");
         
-        
+        txtName.setText("");
+        txtAge.setText("");
+        txtGender.setText("");
+        txtLevel.setText("");
+        txtPositionTitle.setText("");
+        txtStartDate.setText("");
+        txtEmployeeID.setText("");
+        txtTeamInfo.setText("");
+        txtContactNumber.setText("");
+        txtEmailID.setText("");
+    
         
         
     }//GEN-LAST:event_jbSaveActionPerformed
