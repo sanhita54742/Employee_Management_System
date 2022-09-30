@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Employee;
 import model.EmployeeHistory;
+import java.util.ArrayList;
 
 /**
  *
@@ -302,12 +303,6 @@ public class Read extends javax.swing.JPanel {
         txtPositionTitle.setText(String.valueOf(selectedEmployee.getPosition_title()));
         txtContactNumber.setText(String.valueOf(selectedEmployee.getCell_phone_number()));
         txtEmailID.setText(String.valueOf(selectedEmployee.getEmail_address()));
-       
-        
-        
-        
-        
-        
         
     }//GEN-LAST:event_jbviewActionPerformed
 
@@ -318,14 +313,13 @@ public class Read extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Select a roe to delete.");
             return;
         }
-        
+       
         DefaultTableModel model = (DefaultTableModel) tableData.getModel();
-        Employee selectedEmployee = (Employee) model.getValueAt(selectedRowIndex, 0);
-        history.deleteEmployee(selectedEmployee);
-        
+       
+        model.removeRow(tableData.getSelectedRow());
         JOptionPane.showMessageDialog(this, "Employee deleted.");
-        
-        displayEmployee();
+//        
+
 
         
         
@@ -394,7 +388,7 @@ public class Read extends javax.swing.JPanel {
         
         for (Employee emp : history.getHistory()){
             
-            Oject[] row = new Object[10];
+            Object[] row = new Object[10];
             row[0] = emp.getName();
             row[1] = emp.getEmployeeID();
             row[2] = emp.getAge();
@@ -418,8 +412,8 @@ public class Read extends javax.swing.JPanel {
             
         }
         
- 
-    
+
     }
+
 
 }
