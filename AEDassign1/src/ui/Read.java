@@ -62,7 +62,7 @@ public class Read extends javax.swing.JPanel {
         txtGender = new javax.swing.JTextField();
         lblStartDate = new javax.swing.JLabel();
         txtStartDate = new javax.swing.JTextField();
-        udpatebtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         lblCreate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -165,10 +165,10 @@ public class Read extends javax.swing.JPanel {
 
         lblStartDate.setText("Start Date:");
 
-        udpatebtn.setText("UPDATE");
-        udpatebtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("UPDATE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                udpatebtnActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -238,7 +238,7 @@ public class Read extends javax.swing.JPanel {
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(296, 296, 296)
-                .addComponent(udpatebtn)
+                .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -296,7 +296,7 @@ public class Read extends javax.swing.JPanel {
                     .addComponent(lblEmail_ID)
                     .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(udpatebtn)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -324,9 +324,6 @@ public class Read extends javax.swing.JPanel {
          
          String ContactNo = (model.getValueAt(row, 8)).toString();
          String Email = (model.getValueAt(row, 9)).toString();
-
-         
-        
         txtName.setText(Name);
         txtEmployeeID.setText(EMPID);
         txtAge.setText(Age);
@@ -401,64 +398,98 @@ public class Read extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGenderActionPerformed
 
-    private void udpatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_udpatebtnActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = tableData.getSelectedRow();
-        if (selectedRowIndex<0) {
-            JOptionPane.showMessageDialog(this, "Select a row to Update.");
-            return;
+//        int selectedRowIndex = tableData.getSelectedRow();
+
+        DefaultTableModel model = (DefaultTableModel) tableData.getModel();
+        
+        if(tableData.getSelectedRowCount() == 1){
+            String Name = txtName.getText();
+            int Age = Integer.parseInt(txtAge.getText());
+            String Gender = txtGender.getText();
+            String Level = txtLevel.getText();
+            String Position_title = txtPositionTitle.getText();
+            String Start_date = txtStartDate.getText();
+            int EmployeeID = Integer.parseInt(txtEmployeeID.getText());
+            String Team_Info = txtTeamInfo.getText();
+            int Cell_phone_number = Integer.parseInt(txtContactNumber.getText());
+            String Email_address = txtEmailID.getText();
+            
+            model.setValueAt(Name, tableData.getSelectedRow(), 0);
+            model.setValueAt(Age, tableData.getSelectedRow(), 1);
+            model.setValueAt(Gender, tableData.getSelectedRow(), 2);
+            model.setValueAt(Level, tableData.getSelectedRow(), 3);
+            model.setValueAt(Position_title, tableData.getSelectedRow(), 4);
+            model.setValueAt(Start_date, tableData.getSelectedRow(), 5);
+            model.setValueAt(EmployeeID, tableData.getSelectedRow(), 6);
+            model.setValueAt(Team_Info, tableData.getSelectedRow(), 7);
+            model.setValueAt(Cell_phone_number, tableData.getSelectedRow(), 8);
+            model.setValueAt(Email_address, tableData.getSelectedRow(), 9);
+            
+            JOptionPane.showMessageDialog(this, "Updated Successfully");
+
         }
         
+//        String tblName = model.getValueAt(tableData.getSelectedRow(), 0).toString();
+//        int tblAge = (Integer) model.getValueAt(tableData.getSelectedRow(), 1);
+//        String tblGender = model.getValueAt(tableData.getSelectedRow(), 2).toString();
+//        String tblLevel = model.getValueAt(tableData.getSelectedRow(), 3).toString();
+//        String tblPosition = model.getValueAt(tableData.getSelectedRow(), 4).toString();
+//        String tblStartDate = model.getValueAt(tableData.getSelectedRow(), 5).toString();
+//        int tblID = (Integer) model.getValueAt(tableData.getSelectedRow(), 6);
+//        String tblTeamInfo = model.getValueAt(tableData.getSelectedRow(), 7).toString();
+//        int tblPhoneNumber = (Integer) model.getValueAt(tableData.getSelectedRow(), 8);
+//        String tblEmail = model.getValueAt(tableData.getSelectedRow(), 9).toString();
+//        
         
+    
+//        if (selectedRowIndex<0) {
+//            JOptionPane.showMessageDialog(this, "Select a row to Update.");
+//            return;
+//        }
         
-        String Name = txtName.getText();
-        int Age = Integer.parseInt(txtAge.getText());
-        String Gender = txtGender.getText();
-        String Level = txtLevel.getText();
-        String Position_title = txtPositionTitle.getText();
-        String Start_date = txtStartDate.getText();
-        int EmployeeID = Integer.parseInt(txtEmployeeID.getText());
-        String Team_Info = txtTeamInfo.getText();
-        int Cell_phone_number = Integer.parseInt(txtContactNumber.getText());
-        String Email_address = txtEmailID.getText();
         
 
-       
-        Employee emp = history.addNewEmployee();
-        emp.setName(Name);
-        emp.setAge(Age);
-        emp.setGender(Gender);
-        emp.setLevel(Level);
-        emp.setPosition_title(Position_title);
-        emp.setStart_date(Start_date);
-        emp.setEmployeeID(EmployeeID);
-        emp.setTeam_Info(Team_Info);
-        emp.setCell_phone_number(Cell_phone_number);
-        emp.setEmail_address(Email_address);
-        displayEmployee();
-        DefaultTableModel model = (DefaultTableModel) tableData.getModel();
-       
+//        
+//
+//       
+//        Employee emp = history.addNewEmployee();
+//        emp.setName(Name);
+//        emp.setAge(Age);
+//        emp.setGender(Gender);
+//        emp.setLevel(Level);
+//        emp.setPosition_title(Position_title);
+//        emp.setStart_date(Start_date);
+//        emp.setEmployeeID(EmployeeID);
+//        emp.setTeam_Info(Team_Info);
+//        emp.setCell_phone_number(Cell_phone_number);
+//        emp.setEmail_address(Email_address);
+//        displayEmployee();
+//        DefaultTableModel model = (DefaultTableModel) tableData.getModel();
+//       
 
-        model.removeRow(selectedRowIndex);
-        txtName.setText("");
-        txtAge.setText("");
-        txtGender.setText("");
-        txtLevel.setText("");
-        txtPositionTitle.setText("");
-        txtStartDate.setText("");
-        txtEmployeeID.setText("");
-        txtTeamInfo.setText("");
-        txtContactNumber.setText("");
-        txtEmailID.setText("");
+//        model.removeRow(selectedRowIndex);
+//        txtName.setText("");
+//        txtAge.setText("");
+//        txtGender.setText("");
+//        txtLevel.setText("");
+//        txtPositionTitle.setText("");
+//        txtStartDate.setText("");
+//        txtEmployeeID.setText("");
+//        txtTeamInfo.setText("");
+//        txtContactNumber.setText("");
+//        txtEmailID.setText("");
         
         
-        JOptionPane.showMessageDialog(this, "Employee Information Updated.");
+//        JOptionPane.showMessageDialog(this, "Employee Information Updated.");
         
         
-    }//GEN-LAST:event_udpatebtnActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbDelete;
     private javax.swing.JButton jbview;
@@ -484,7 +515,6 @@ public class Read extends javax.swing.JPanel {
     private javax.swing.JTextField txtPositionTitle;
     private javax.swing.JTextField txtStartDate;
     private javax.swing.JTextField txtTeamInfo;
-    private javax.swing.JButton udpatebtn;
     // End of variables declaration//GEN-END:variables
 
     private void displayEmployee() {

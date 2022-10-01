@@ -259,18 +259,18 @@ public class Update extends javax.swing.JPanel {
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
         // TODO add your handling code here:
 
-        employee.setName(txtName.getText());
-        employee.setAge(txtAge.getText());
-        employee.setGender(txtGender.getText());
-        employee.setLevel(txtLevel.getText());
-        employee.setPosition_title(txtPositionTitle.getText());
-        employee.setStart_date(txtStartDate.getText());
-        employee.setEmployeeID(txtEmployeeID.getText());
-        employee.setTeam_Info(txtTeamInfo.getText());
-        employee.setCell_phone_number(txtContactNumber.getText());
-        employee.setEmail_address(txtEmailID.getText());
-
-        JOptionPane.showMessageDialog(this, "Employee Information Saved. ");
+//        employee.setName(txtName.getText());
+//        employee.setAge(txtAge.getText());
+//        employee.setGender(txtGender.getText());
+//        employee.setLevel(txtLevel.getText());
+//        employee.setPosition_title(txtPositionTitle.getText());
+//        employee.setStart_date(txtStartDate.getText());
+//        employee.setEmployeeID(txtEmployeeID.getText());
+//        employee.setTeam_Info(txtTeamInfo.getText());
+//        employee.setCell_phone_number(txtContactNumber.getText());
+//        employee.setEmail_address(txtEmailID.getText());
+//
+//        JOptionPane.showMessageDialog(this, "Employee Information Saved. ");
 
     }//GEN-LAST:event_jbSaveActionPerformed
 
