@@ -39,7 +39,6 @@ public class MJFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnRead = new javax.swing.JButton();
         btnCreate = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         controlPanel = new javax.swing.JPanel();
 
@@ -70,13 +69,6 @@ public class MJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -85,7 +77,6 @@ public class MJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnCreate)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -98,9 +89,7 @@ public class MJFrame extends javax.swing.JFrame {
                 .addComponent(btnCreate)
                 .addGap(18, 18, 18)
                 .addComponent(btnRead)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(384, Short.MAX_VALUE))
         );
 
         splitPanel.setLeftComponent(jPanel3);
@@ -171,10 +160,6 @@ public class MJFrame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -214,7 +199,6 @@ public class MJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnRead;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
