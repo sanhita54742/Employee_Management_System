@@ -10,14 +10,14 @@ package model;
  */
 public class Employee {
       private String Name;
-      private int EmployeeID;
-      private int Age;    //2
+      private String EmployeeID;
+      private int Age;    
       private String Gender;
       private String Start_date;
       private String Level;
       private String Team_Info;
       private String Position_title;
-      private int Cell_phone_number;  //2
+      private String Cell_phone_number;  
       private String Email_address;
 
     public String getName() {
@@ -28,11 +28,11 @@ public class Employee {
         this.Name = Name;
     }
 
-    public int getEmployeeID() {
+    public String getEmployeeID() {
         return EmployeeID;
     }
 
-    public void setEmployeeID(int EmployeeID) {
+    public void setEmployeeID(String EmployeeID) {
         this.EmployeeID = EmployeeID;
     }
 
@@ -84,11 +84,11 @@ public class Employee {
         this.Position_title = Position_title;
     }
 
-    public int getCell_phone_number() {
+    public String getCell_phone_number() {
         return Cell_phone_number;
     }
 
-    public void setCell_phone_number(int Cell_phone_number) {
+    public void setCell_phone_number(String Cell_phone_number) {
         this.Cell_phone_number = Cell_phone_number;
     }
 
