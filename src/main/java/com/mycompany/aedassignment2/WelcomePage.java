@@ -8,8 +8,7 @@ import javax.swing.JSplitPane;
 import model.MainHistory;
 
 /**
- *
- * @author rosha
+ 
  */
 public class WelcomePage extends javax.swing.JPanel {
     JSplitPane jSplitPane1;

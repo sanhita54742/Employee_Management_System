@@ -10,8 +10,7 @@ import model.MainHistory;
 import model.MainModel;
 
 /**
- *
- * @author rosha
+ 
  */
 public class LoginPane extends javax.swing.JPanel {
     MainHistory history;

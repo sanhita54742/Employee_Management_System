@@ -10,7 +10,7 @@ import model.MainModel;
 
 /**
  *
- * @author rosha
+
  */
 public class MainPageFrame extends javax.swing.JFrame {
     MainHistory history;

@@ -9,7 +9,7 @@ import model.MainHistory;
 
 /**
  *
- * @author rosha
+ 
  */
 public class SystemAdminPane extends javax.swing.JPanel {
     MainHistory history;

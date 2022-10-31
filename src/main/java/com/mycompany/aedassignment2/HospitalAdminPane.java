@@ -9,7 +9,6 @@ import model.MainHistory;
 
 /**
  *
- * @author rosha
  */
 public class HospitalAdminPane extends javax.swing.JPanel {
     MainHistory history;

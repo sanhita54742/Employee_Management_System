@@ -7,8 +7,6 @@ package model;
 import java.util.ArrayList;
 
 /**
- *
- * @author Admin
  */
 public class MainHistory {    
     

@@ -20,8 +20,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JSplitPane;
 /**
- *
- * @author rosha
+ 
  */
 public class SignupPane extends javax.swing.JPanel {
     MainHistory history;
