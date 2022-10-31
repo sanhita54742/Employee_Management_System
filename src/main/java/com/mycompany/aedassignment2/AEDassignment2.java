@@ -3,14 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.aedassignment2;
-import com.mycompany.aedassignment2.MainPage;
+import com.mycompany.aedassignment2.MainPageFrame;
 /**
  *
  * @author Admin
  */
 public class AEDassignment2 {
  public static void main(String[] args) {
-        MainPage obj = new MainPage();
+        MainPageFrame obj = new MainPageFrame();
         obj.setVisible(true);
     }   
 }

@@ -4,19 +4,23 @@
  */
 package com.mycompany.aedassignment2;
 
+import javax.swing.JSplitPane;
 import model.MainHistory;
 
 /**
  *
-
  */
 public class CommunityOptionPane extends javax.swing.JPanel {
     MainHistory history;
+    JSplitPane jSplitPane2;
+    
     /**
      * Creates new form CommunityOptionPane
      */
-    public CommunityOptionPane(MainHistory history) {
+    public CommunityOptionPane(MainHistory history, JSplitPane jSplitPane) {
         initComponents();
+        this.history = history;
+        this.jSplitPane2 = jSplitPane;
     }
 
     /**
@@ -46,6 +50,8 @@ public class CommunityOptionPane extends javax.swing.JPanel {
         inpContact1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(0, 153, 153));
+
         cityCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cityCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,11 +72,11 @@ public class CommunityOptionPane extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(hospitalTable);
 
-        jLabel1.setText("Name");
+        jLabel1.setText("NAME:");
 
-        jLabel2.setText("Address");
+        jLabel2.setText("ADDRESS:");
 
-        jLabel3.setText("DOB");
+        jLabel3.setText("DOB:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("UPDATE DETAILS");
@@ -94,9 +100,14 @@ public class CommunityOptionPane extends javax.swing.JPanel {
 
         jLabel11.setText("Contact");
 
-        jLabel12.setText("GENDER");
+        jLabel12.setText("GENDER:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -116,7 +127,7 @@ public class CommunityOptionPane extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(126, 489, Short.MAX_VALUE))))
+                                .addGap(126, 495, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(270, 270, 270)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -144,7 +155,7 @@ public class CommunityOptionPane extends javax.swing.JPanel {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -251,6 +262,10 @@ public class CommunityOptionPane extends javax.swing.JPanel {
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewBtnActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

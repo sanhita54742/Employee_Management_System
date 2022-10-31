@@ -4,6 +4,7 @@
  */
 package com.mycompany.aedassignment2;
 
+import javax.swing.JSplitPane;
 import model.MainHistory;
 
 /**
@@ -15,7 +16,7 @@ public class SystemAdminPane extends javax.swing.JPanel {
     /**
      * Creates new form SystemAdminPane
      */
-    public SystemAdminPane(MainHistory history) {
+    public SystemAdminPane(MainHistory history,JSplitPane jSplitPane1) {
         initComponents();
         this.history = history;
     }
@@ -76,7 +77,7 @@ public class SystemAdminPane extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(172, 172, 172)
                 .addComponent(jButton2)
                 .addGap(43, 43, 43)
                 .addComponent(jButton3)
@@ -84,7 +85,7 @@ public class SystemAdminPane extends javax.swing.JPanel {
                 .addComponent(jButton4)
                 .addGap(55, 55, 55)
                 .addComponent(jButton5)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
