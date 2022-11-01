@@ -5,14 +5,16 @@
 package com.mycompany.aedassignment2;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.HospitalAction;
 import model.MainHistory;
 
 import model.MainModel;
 
 /**
  *
-
+ * @author Admin
  */
 public class ManageHospitalPane extends javax.swing.JPanel {
     MainHistory history;
@@ -24,10 +26,11 @@ public class ManageHospitalPane extends javax.swing.JPanel {
         this.history = history;
         cityCombobox.removeAllItems();
         for(MainModel mainM : history.getHistory()){
+            if(mainM.getCity()!=null){
                 cityCombobox.addItem(mainM.getCity());
-                
             }
-        displayHospital(cityCombobox.getSelectedIndex());
+            }
+        displayHospital(0);
     }
 
     /**
@@ -60,15 +63,19 @@ public class ManageHospitalPane extends javax.swing.JPanel {
         updateBtn = new javax.swing.JButton();
         viewBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
+        cityCombobox.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
         cityCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cityCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cityComboboxActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setBackground(new java.awt.Color(0, 153, 153));
 
         hospitalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,24 +90,51 @@ public class ManageHospitalPane extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(hospitalTable);
 
+        jLabel1.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Name");
 
+        jLabel2.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Address");
 
+        jLabel3.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Contact");
 
+        inpName.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        inpAddress.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        inpContact.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Name");
 
+        jLabel5.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Address");
 
+        jLabel6.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Contact");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateName.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        updateAddress.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        updateContact.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("UPDATE HOSPITAL");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("ADD NEW HOSPITAL");
 
+        addBtn.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
         addBtn.setText("ADD");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,8 +142,15 @@ public class ManageHospitalPane extends javax.swing.JPanel {
             }
         });
 
+        updateBtn.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
         updateBtn.setText("UPDATE");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
 
+        viewBtn.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
         viewBtn.setText("VIEW");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +158,7 @@ public class ManageHospitalPane extends javax.swing.JPanel {
             }
         });
 
+        deleteBtn.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
         deleteBtn.setText("DELETE");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,96 +166,112 @@ public class ManageHospitalPane extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
+        jLabel10.setText("SELECT CITY");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inpContact, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                                .addGap(61, 61, 61)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
-                                            .addComponent(updateContact))
+                                            .addComponent(inpContact))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
-                                            .addComponent(updateAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(126, 126, 126)
+                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(updateContact))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(updateAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addComponent(updateName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(96, 96, 96)))
-                        .addGap(33, 33, 33))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(17, 17, 17)
+                                            .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(34, 34, 34))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(69, 69, 69))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inpName))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inpName)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inpContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inpContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(updateName)
@@ -225,18 +283,26 @@ public class ManageHospitalPane extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(updateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(48, 48, 48))
+                            .addComponent(updateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cityComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityComboboxActionPerformed
         if(cityCombobox.getSelectedIndex()!=-1){
-            displayHospital(cityCombobox.getSelectedIndex());
+            ArrayList<MainModel> mainM = history.getHistory();
+            int index = 0;
+            for(int i =0;i<mainM.size();i++){
+                if(mainM.get(i).getCity()!=null){
+                    if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                        index = i;
+                        break;
+                }
+            }
+            }
+            displayHospital(index);
         }
         
         
@@ -244,14 +310,59 @@ public class ManageHospitalPane extends javax.swing.JPanel {
     }//GEN-LAST:event_cityComboboxActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
-        // TODO add your handling code here:
+        int selectedRowIndex = hospitalTable.getSelectedRow();
+        if (selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to delete.");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+        updateName.setText((model.getValueAt(selectedRowIndex, 0)).toString());
+        updateAddress.setText((model.getValueAt(selectedRowIndex, 1)).toString());
+        updateContact.setText((model.getValueAt(selectedRowIndex, 2)).toString());
+        
+        
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
+        int selectedRowIndex = hospitalTable.getSelectedRow();
+        if (selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to delete.");
+            return;
+        }
+       
+        DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+        int index = 0;
+        if(cityCombobox.getSelectedIndex()!=-1){
+            ArrayList<MainModel> mainM = history.getHistory();
+            
+            for(int i =0;i<mainM.size();i++){
+                if(mainM.get(i).getCity()!=null){
+                    if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                        index = i;
+                        break;
+                }
+            }
+            }
+            
+        }
+//        int cityIndex = cityCombobox.getSelectedIndex();
+        
+        ArrayList<MainModel> mainM = history.getHistory();
+        
+    //        ArrayList<MainModel> mainM = history.getHistory();
+//        history.deleteDoctor();
+            mainM.get(index).getHospitalArray().get(selectedRowIndex).deleteHospital(index,selectedRowIndex,history);
+//        MainModel mainModel = mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).remove(cityIndex,hospitalIndex,selectedRowIndex);
+        displayHospital(index);
+//        model.removeRow(doctorTable.getSelectedRow());
+        JOptionPane.showMessageDialog(this, "Hospital deleted.");
+                // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+            try
+            {
+            FieldsValidation fv = new FieldsValidation();
             String Name = inpName.getText();
             String Address = inpAddress.getText();
             long Contact = Long.parseLong(inpContact.getText());
@@ -259,39 +370,133 @@ public class ManageHospitalPane extends javax.swing.JPanel {
 
             ArrayList<MainModel> mainM = history.getHistory();
 
-           
-            int Flag = 0;
-            for(int i = 0;i<mainM.size();i++){
-                if(mainM.get(i).getCity() == cityCombobox.getSelectedItem().toString()){
-                    
-                    for(int k =0 ; k < mainM.get(i).getHospitalArray().size();k++){
+            if(Name.equals("") || Address.equals("") || String.valueOf(Contact)=="")
+            {
+                throw new Exception("Please fill all the fields");
+            }
 
+            if(!fv.verifyName(Name)){
+                inpName.setText("");
+                throw new Exception("Please enter valid name");
+            }
+
+
+
+
+            if(!fv.verifyAdress(Address)){
+                inpAddress.setText("");
+                throw new Exception("Please enter valid address");
+            }
+            if(!fv.verifyContact(Contact)){
+                inpContact.setText("");
+                throw new Exception("Please enter valid Contact");
+            }
+            int Flag = 0;
+            int index =0;
+            for(int i = 0;i<mainM.size();i++){
+                if(mainM.get(i).getCity() != null){
+                if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem().toString())){
+                    System.out.println("city found");
+                    index = i;
+                    for(int k =0 ; k < mainM.get(i).getHospitalArray().size();k++){
+                        if(mainM.get(i).getHospitalArray().get(k).getHospitalName()!=null){
                         if(mainM.get(i).getHospitalArray().get(k).getHospitalName().equals(Name)){
                             Flag = 1;
-
+                            
+                            break;
+                        }
                         }
                     }
+                }
+                }
+            }
                     if(Flag == 0){
-
-                        MainModel mainMo = mainM.get(i).addNewHospital();
+                        System.out.println(mainM.get(index).getCity());
+                        
+                        HospitalAction mainMo = mainM.get(index).addNewHospital();
                         mainMo.setHospitalName(Name);
                         mainMo.setHospitalContact(Contact);
                         mainMo.setHospitalAddress(Address);
-                        System.out.println(mainM.get(i).getHospitalArray().get(0).getHospitalName()+" "+i);
-                        displayHospital(cityCombobox.getSelectedIndex());
+                        System.out.println(mainM.get(index).getHospitalArray().get(0).getHospitalName()+" "+index);
+                        displayHospital(index);
+                        inpName.setText("");
+                        inpAddress.setText("");
+                        inpContact.setText("");
 
                     }
                     else{
                         System.out.println("Hospital Already Exists");
                     }
-                    break;
-                }
+                   
+                
 
-            }
+            
         
-        
+           
+        }catch(Exception e){           
+                    System.out.println("!!!!!!Exception : " + e.getMessage()+ "!!!!!!!!!!");                   
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+          
 
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+                try
+                {
+                    FieldsValidation fv = new FieldsValidation();
+                int selectedRowIndex = hospitalTable.getSelectedRow();
+                if (selectedRowIndex<0) {
+                    JOptionPane.showMessageDialog(this, "Select a row to update.");
+                    return;
+                }
+                String Name = updateName.getText();
+                long Contact = Long.parseLong(updateContact.getText());
+                String Address = updateAddress.getText();
+//                 if (Address!= "") {
+//                    JOptionPane.showMessageDialog(this, "Please enter the address");
+//                    return;
+//                }
+            if(Name.equals("")  || Address.equals( ""))
+           {
+               throw new Exception("Please fill all the fields");
+           }
+                 if(!fv.verifyAdress(Address)){
+                     updateAddress.setText("");
+                        throw new Exception("Please enter valid Address");
+                 }
+                 if(!fv.verifyName(Name)){
+                     updateName.setText("");
+                        throw new Exception("Please enter valid Name");
+                 }
+                 if(!fv.verifyContact(Contact)){
+                     updateContact.setText("");
+                        throw new Exception("Please enter valid Contact");
+                 }
+                ArrayList<MainModel> mainM = history.getHistory();
+                    int index = 0;
+                    for(int i =0;i<mainM.size();i++){
+                        if(mainM.get(i).getCity()!=null){
+                            if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                                index = i;
+                                break;
+                        }
+                    }
+                    }
+              
+                    for (int i =0;i<mainM.get(index).getHospitalArray().size();i++){
+                      if(mainM.get(index).getHospitalArray().get(selectedRowIndex).getHospitalName() != null){    
+                        mainM.get(index).getHospitalArray().get(selectedRowIndex).setHospitalName(Name);
+                        mainM.get(index).getHospitalArray().get(selectedRowIndex).setHospitalContact(Contact);
+                        mainM.get(index).getHospitalArray().get(selectedRowIndex).setHospitalAddress(Address);
+                      }
+                    }
+                    displayHospital(index);
+                }catch(Exception e){
+                    System.out.println("!!!!!!Exception : " + e.getMessage()+ "!!!!!!!!!!");                   
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                }
+    }//GEN-LAST:event_updateBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,6 +508,7 @@ public class ManageHospitalPane extends javax.swing.JPanel {
     private javax.swing.JTextField inpContact;
     private javax.swing.JTextField inpName;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -11,45 +11,36 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class MainModel {
-    MainHistory history;
+  
     
-      private String Name;
-      
-      private int Age;    
-      private String Gender;
-      private String HospitalName;
-      private String DoctorName;
-      private String doctorUserId;
-      private String DoctorAddress;
-      private long DoctorContact;
       private String PersonName;
       private String PersonId;
       private String PersonPass;
       private String PersonRole;
+      private String PersonAddress;
+      private long PersonContact;
+      private String PersonDob;
+      private String PersonGender;
+      private String PersonCity;
+      
       private String SessionPass;
       private String SessionRole;
       private String SessionId;
       private String SessionName;
-      private String appointmentUserId;
-      private String appointmentName;
-      private String appointmentDob;
-      private String appointmentContact;
-      private String appointmentDate;
-      private String appointmentAddress;
-      private String appointmentReason;
-      private String appointmentComment;
+      private String SessionGender;
+      private String SessionAddress;
+      private long SessionContact;
+      private String SessionDob;
       
-      private long HospitalContact;
-      private String HospitalAddress;
-      private String HospitalAdmin;
+
       
       private String City;
       
-      private ArrayList<MainModel> hospitalArray = new ArrayList();
-      private ArrayList<MainModel> DoctorArray = new ArrayList();
+      private ArrayList<HospitalAction> hospitalArray = new ArrayList();
+
       private ArrayList<MainModel> PersonArray = new ArrayList();
       private ArrayList<MainModel> sessionArray = new ArrayList();
-      private ArrayList<MainModel> appointmentArray = new ArrayList();
+
       
 
 
@@ -58,62 +49,7 @@ public class MainModel {
         this.sessionArray.add(mainModel);
         return mainModel;
     }
-   public MainModel addNewAppointment(){
-        MainModel mainModel = new MainModel();
-        this.appointmentArray.add(mainModel);
-        return mainModel;
-    }
-   public ArrayList<MainModel> getAppointmentArray() {
-        return appointmentArray;
-    }
-   public void setAppointmentUserId(String appointmentUserId) {
-        this.appointmentUserId = appointmentUserId;
-    }
-   public void setAppointmentName(String AppointmentName) {
-        this.appointmentName = AppointmentName;
-    }
-   public void setAppointmentDob(String AppointmentDob) {
-        this.appointmentDob = AppointmentDob;
-    }
-   public void setAppointmentContact(String AppointmentContact) {
-        this.appointmentContact = AppointmentContact;
-    }
-   public void setAppointmentDate(String AppointmentDate) {
-        this.appointmentDate = AppointmentDate;
-    }
-   public void setAppointmentAddress(String AppointmentAddress) {
-        this.appointmentAddress = AppointmentAddress;
-    }
-   public void setAppointmentReason(String AppointmentReason) {
-        this.appointmentReason = AppointmentReason;
-    }
-   public void setAppointmentComment(String AppointmentComment) {
-        this.appointmentComment = AppointmentComment;
-    }
-   public String getAppointmentUserId() {
-        return appointmentUserId;
-    }
-   public String getAppointmentDate() {
-        return appointmentDate;
-    }
-   public String getAppointmentName() {
-        return appointmentName;
-    }
-   public String getAppointmentContact() {
-        return appointmentContact;
-    }
-   public String getAppointmentAddress() {
-        return appointmentAddress;
-    }
-   public String getAppointmentReason() {
-        return appointmentReason;
-    }
-   public String getAppointmentComment() {
-        return appointmentComment;
-    }
-   public String getAppointmentDob() {
-        return appointmentDob;
-    }
+
    public void setSessionName(String SessionName) {
         this.SessionName = SessionName;
     }
@@ -129,6 +65,30 @@ public class MainModel {
    public String getSessionName() {
         return SessionName;
     }
+   public void setSessionAddress(String SessionAddress) {
+        this.SessionAddress = SessionAddress;
+    }
+   public String getSessionAddress() {
+        return SessionAddress;
+    }
+   public void setSessionContact(long SessionContact) {
+        this.SessionContact = SessionContact;
+    }
+   public long getSessionContact() {
+        return SessionContact;
+    }
+   public void setSessionDob(String SessionDob) {
+        this.SessionDob = SessionDob;
+    }
+   public String getSessionDob() {
+        return SessionDob;
+    }
+   public void setSessionGender(String SessionGender) {
+        this.SessionGender = SessionGender;
+    }
+   public String getSessionGender() {
+        return SessionGender;
+    }
     public String getSessionRole() {
         return SessionRole;
     }
@@ -138,19 +98,15 @@ public class MainModel {
     public String getSessionPassword() {
         return SessionPass;
     }
-    public MainModel addNewHospital(){
-        MainModel mainModel = new MainModel();
+    public HospitalAction addNewHospital(){
+        HospitalAction mainModel = new HospitalAction();
         this.hospitalArray.add(mainModel);
         return mainModel;
     }
-    public ArrayList<MainModel> getHospitalArray() {
+    public ArrayList<HospitalAction> getHospitalArray() {
         return hospitalArray;
     }
-    public MainModel addNewPerson(){
-        MainModel mainModel = new MainModel();
-        this.PersonArray.add(mainModel);
-        return mainModel;
-    }
+    
     public ArrayList<MainModel> getPersonArray() {
         return PersonArray;
     }
@@ -166,6 +122,36 @@ public class MainModel {
     public void setPersonPassword(String PersonPass) {
         this.PersonPass = PersonPass;
     }
+    public void setPersonAddress(String PersonAddress) {
+        this.PersonAddress = PersonAddress;
+    }
+    public String getPersonAddress() {
+        return PersonAddress;
+    }
+    public void setPersonContact(long PersonContact) {
+        this.PersonContact = PersonContact;
+    }
+    public long getPersonContact() {
+        return PersonContact;
+    }
+    public void setPersonCity(String PersonCity) {
+        this.PersonCity = PersonCity;
+    }
+    public String getPersonCity() {
+        return PersonCity;
+    }
+    public void setPersonDob(String PersonDob) {
+        this.PersonDob = PersonDob;
+    }
+    public String getPersonDob() {
+        return PersonDob;
+    }
+    public void setPersonGender(String PersonGender) {
+        this.PersonGender = PersonGender;
+    }
+    public String getPersonGender() {
+        return PersonGender;
+    }
     public String getPersonName() {
         return PersonName;
     }
@@ -178,74 +164,15 @@ public class MainModel {
     public String getPersonPassword() {
         return PersonPass;
     }
-    public MainModel addNewDoctor(){
-        MainModel mainModel = new MainModel();
-        this.DoctorArray.add(mainModel);
-        return mainModel;
-    }
-    public ArrayList<MainModel> deleteDoctor(int i, int j, int k, MainHistory history){
-        this.history = history;
-        ArrayList<MainModel> mainModel = history.getHistory();
-        mainModel.get(i).getHospitalArray().get(j).getDoctorArray().remove(mainModel);
-        return mainModel;
-    }
-    public ArrayList<MainModel> getDoctorArray() {
-        return DoctorArray;
-    }
-    public void setDoctorName(String DoctorName) {
-        this.DoctorName = DoctorName;
-    }
-    public String getDoctorName() {
-        return DoctorName;
-    }
-    public void setDoctorContact(long DoctorContact) {
-        this.DoctorContact = DoctorContact;
-    }
-    public long getDoctorContact() {
-        return DoctorContact;
-    }
-    public void setDoctorAddress(String DoctorAddress) {
-        this.DoctorAddress = DoctorAddress;
-    }
-    public String getDoctorAddress() {
-        return DoctorAddress;
-    }
-    public void setDoctorUserId(String DoctorUserId) {
-        this.doctorUserId = DoctorUserId;
-    }
-    public String getDoctorUserId() {
-        return doctorUserId;
-    }
-    public void setHospitalName(String HospitalName) {
-        this.HospitalName = HospitalName;
-    }
-    public void setHospitalAdmin(String HospitalAdmin) {
-        this.HospitalAdmin = HospitalAdmin;
-    }
-    public String getHospitalName() {
-        return HospitalName;
-    }
-    public void setHospitalContact(long HospitalContact) {
-        
-        this.HospitalContact = HospitalContact;
-    }
-    public long getHospitalContact() {
-        return HospitalContact;
-    }
-    
-    public void setHospitalAddress(String HospitalAddress) {
-        
-        this.HospitalAddress = HospitalAddress;
-    }
-    public String getHospitalAddress() {
-        return HospitalAddress;
-    }
+
     public void setCity(String City) {
         this.City = City;
     }
     public String getCity() {
         return City;
     }
+
+
 
 
 }

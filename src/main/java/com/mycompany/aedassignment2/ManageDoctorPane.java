@@ -7,11 +7,13 @@ package com.mycompany.aedassignment2;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.DoctorAction;
 import model.MainHistory;
 import model.MainModel;
 
 /**
  *
+ * @author Admin
  */
 public class ManageDoctorPane extends javax.swing.JPanel {
 
@@ -26,9 +28,10 @@ public class ManageDoctorPane extends javax.swing.JPanel {
         cityCombobox.removeAllItems();
         
         for(MainModel mainM : history.getHistory()){
-            
+            if(mainM.getCity()!=null){
                 cityCombobox.addItem(mainM.getCity());
-                
+            }
+            
             }
         
         ArrayList<MainModel> mainM = history.getHistory();
@@ -37,9 +40,9 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             int Flag = 0;
             int j = cityCombobox.getSelectedIndex();
             for (int i =0;i<mainM.get(j).getHospitalArray().size();i++){
-                
+                if(mainM.get(j).getHospitalArray().get(i).getHospitalName()!=null){
                 hospitalCombobox.addItem(mainM.get(j).getHospitalArray().get(i).getHospitalName());
-
+                }
             }
             if(cityCombobox.getSelectedIndex()!=-1 && hospitalCombobox.getSelectedIndex()!=-1){
         displayDoctor(cityCombobox.getSelectedIndex(),hospitalCombobox.getSelectedIndex());
@@ -80,11 +83,19 @@ public class ManageDoctorPane extends javax.swing.JPanel {
         hospitalCombobox = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         inpUserId = new javax.swing.JTextField();
+        password = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        userIdLabel = new javax.swing.JLabel();
+        DOB = new javax.swing.JLabel();
+        DOB1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        inpUserPass = new javax.swing.JPasswordField();
+        inpGender = new javax.swing.JComboBox<>();
+        inpDob = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
+        cityCombobox.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         cityCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cityCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,37 +103,67 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(173, 226, 244));
+
+        doctorTable.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         doctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "NAME", "ADDRESS", "CONTACT"
+                "UID", "NAME", "ADDRESS", "CONTACT", "DOB", "GENDER"
             }
         ));
         jScrollPane1.setViewportView(doctorTable);
 
-        jLabel1.setText("Name:");
+        jLabel1.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Name");
 
-        jLabel2.setText("Address:");
+        jLabel2.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Address");
 
-        jLabel3.setText("Contact:");
+        jLabel3.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Contact");
 
-        jLabel4.setText("Name:");
+        inpName.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
 
-        jLabel5.setText("Address:");
+        inpAddress.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
 
-        jLabel6.setText("Contact:");
+        inpContact.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Name");
+
+        jLabel5.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Address");
+
+        jLabel6.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Contact");
+
+        updateName.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        updateAddress.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        updateContact.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("UPDATE DOCTOR");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("ADD NEW DOCTOR");
 
+        addBtn.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
         addBtn.setText("ADD");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +171,7 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             }
         });
 
+        updateBtn.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
         updateBtn.setText("UPDATE");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +179,7 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             }
         });
 
+        viewBtn.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
         viewBtn.setText("VIEW");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +187,7 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             }
         });
 
+        deleteBtn.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
         deleteBtn.setText("DELETE");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +195,7 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             }
         });
 
+        hospitalCombobox.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         hospitalCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         hospitalCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,15 +203,42 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             }
         });
 
-        jLabel9.setText("User ID:");
+        jLabel9.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("User ID");
 
+        inpUserId.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        password.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        password.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        password.setText("Password");
+
+        jLabel10.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("User ID");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        userIdLabel.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        DOB.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        DOB.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        DOB.setText("DOB");
+
+        DOB1.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        DOB1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        DOB1.setText("GENDER");
+
+        jLabel11.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
+        jLabel11.setText("SELECT CITY");
+
+        inpGender.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        inpGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", "OTHER" }));
+        inpGender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                inpGenderActionPerformed(evt);
             }
         });
+
+        inpDob.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,128 +246,157 @@ public class ManageDoctorPane extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
+                                .addComponent(hospitalCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(179, 179, 179))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(inpContact)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inpUserId))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                                        .addComponent(inpContact))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(inpUserPass))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(DOB1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(inpGender, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(inpUserId))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(DOB, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(inpDob)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(updateContact))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(updateAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(updateName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(100, 100, 100))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(hospitalCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap())))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(158, 158, 158))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(updateName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(updateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(updateAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(100, 100, 100))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(7, 7, 7)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(userIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(101, 101, 101))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(150, 150, 150))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hospitalCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hospitalCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(inpUserId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inpName)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(inpContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel9)
+                            .addComponent(inpUserId, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(updateName)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updateAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(updateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(44, 44, 44)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(userIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(234, 234, 234))
+                    .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(inpContact)
+                        .addComponent(updateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(inpDob)
+                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DOB1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(inpGender))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(inpUserPass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 249, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -316,16 +417,26 @@ public class ManageDoctorPane extends javax.swing.JPanel {
                hospitalCombobox.removeAllItems();
            
             int Flag = 0;
-            int j = cityCombobox.getSelectedIndex();
+//            ArrayList<MainModel> mainM = history.getHistory();
+                    int index = 0;
+                    for(int i =0;i<mainM.size();i++){
+                        if(mainM.get(i).getCity()!=null){
+                            if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                                index = i;
+                                break;
+                        }
+                    }
+                    }
+            int j = index;
             for (int i =0;i<mainM.get(j).getHospitalArray().size();i++){
                         
-
+                    if(mainM.get(j).getHospitalArray().get(i).getHospitalName()!=null){
                         hospitalCombobox.addItem(mainM.get(j).getHospitalArray().get(i).getHospitalName());
 
-
+                    }
             }
             if(hospitalCombobox.getSelectedIndex()!=-1){
-                displayDoctor(cityCombobox.getSelectedIndex(),hospitalCombobox.getSelectedIndex());
+                displayDoctor(index,hospitalCombobox.getSelectedIndex());
             }
             
         }
@@ -333,6 +444,9 @@ public class ManageDoctorPane extends javax.swing.JPanel {
     }//GEN-LAST:event_cityComboboxActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        try
+        {
+            FieldsValidation fv = new FieldsValidation();
         String Name = inpName.getText();
         String Address = inpAddress.getText();
         long Contact = Long.parseLong(inpContact.getText());
@@ -340,21 +454,56 @@ public class ManageDoctorPane extends javax.swing.JPanel {
         String DoctorUserPass = inpUserPass.getText();
         String City = (String) cityCombobox.getSelectedItem();
         String Hospital = (String) hospitalCombobox.getSelectedItem();
-        int i = cityCombobox.getSelectedIndex();
-        int j = hospitalCombobox.getSelectedIndex();
+//        inpDob.getDateEditor().getUiComponent().getText();
+        String Dob  = inpDob.getText();
+//        String Dob = inpDob.getNewValue();
+        String Gender = inpGender.getSelectedItem().toString();
         ArrayList<MainModel> mainM = history.getHistory();
-
+                    int index = 0;
+                    for(int i =0;i<mainM.size();i++){
+                        if(mainM.get(i).getCity()!=null){
+                            if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                                index = i;
+                                break;
+                        }
+                    }
+                    }
+        int i = index;
+        int j = hospitalCombobox.getSelectedIndex();
+//        ArrayList<MainModel> mainM = history.getHistory();
+        if(DoctorUserId.equals("") || Name.equals("") || Address.equals("") || String.valueOf(Contact).equals("") || City.equals("") || Hospital.equals("") || Dob.equals("") || Gender.equals("") || String.valueOf(Contact).equals("")
+            )
+           {
+               throw new Exception("Please fill all the fields");
+           }
+            
+           if(!fv.verifyName(Name)){
+               updateName.setText("");
+               throw new Exception("Please enter valid name");
+           }
+           
+           
+         
+           if(!fv.verifyAdress(Address)){
+               updateAddress.setText("");
+               throw new Exception("Please enter valid address");
+           }
+           if(!fv.verifyContact(Contact)){
+               updateContact.setText("");
+               throw new Exception("Please enter valid Contact");
+           }
 //        System.out.println(mainM.size());
         int Flag = 0;
 //        for(int i = 0;i<mainM.size();i++){
             if(mainM.get(i).getCity() == cityCombobox.getSelectedItem().toString() && mainM.get(i).getHospitalArray().get(j).getHospitalName() == hospitalCombobox.getSelectedItem().toString()){
-                System.out.println(mainM.get(i).getCity());
+                
                 mainM.get(i).getHospitalArray();
                 for(int k =0 ; k < mainM.get(i).getHospitalArray().get(hospitalCombobox.getSelectedIndex()).getDoctorArray().size();k++){
+                    if(mainM.get(i).getHospitalArray().get(hospitalCombobox.getSelectedIndex()).getDoctorArray().get(k).getDoctorUserId() != null){
+                        if(mainM.get(i).getHospitalArray().get(hospitalCombobox.getSelectedIndex()).getDoctorArray().get(k).getDoctorUserId().equals(DoctorUserId)){
+                            Flag = 1;
 
-                    if(mainM.get(i).getHospitalArray().get(hospitalCombobox.getSelectedIndex()).getDoctorArray().get(k).getDoctorUserId().equals(DoctorUserId)){
-                        Flag = 1;
-
+                        }
                     }
                 }
                 if(Flag == 0){
@@ -364,21 +513,31 @@ public class ManageDoctorPane extends javax.swing.JPanel {
                     MainMod.setPersonName(Name);
                     MainMod.setPersonPassword(DoctorUserPass);
                     MainMod.setPersonRole("Doctor");
-                    MainModel mainMo = mainM.get(i).getHospitalArray().get(j).addNewDoctor();
+                    MainMod.setPersonGender(Gender);
+                    MainMod.setPersonDob(Dob);
+                    MainMod.setPersonCity(cityCombobox.getSelectedItem().toString());
+                    MainMod.setPersonAddress(Address);
+                     MainMod.setPersonContact(Contact);
+                    
+                    DoctorAction mainMo = mainM.get(i).getHospitalArray().get(j).addNewDoctor();
 //                    System.out.println(Name);
                     mainMo.setDoctorName(Name);
                     mainMo.setDoctorUserId(DoctorUserId);
                     mainMo.setDoctorContact(Contact);
                     mainMo.setDoctorAddress(Address);
 //                    System.out.println(mainM.get(i).getHospitalArray().get(j).getDoctorArray().get(0).getDoctorName()+" "+i);
-                    displayDoctor(cityCombobox.getSelectedIndex(),hospitalCombobox.getSelectedIndex());
+                    displayDoctor(i,hospitalCombobox.getSelectedIndex());
 
                 }
                 else{
-                    System.out.println("Doctor Already Exists");
+                    JOptionPane.showMessageDialog(this,"Doctor Already Exists");
                 }
 
             }
+        }catch(Exception e){              
+                System.out.println("!!!!!!Exception : " + e.getMessage()+ "!!!!!!!!!!");                   
+                JOptionPane.showMessageDialog(this, e.getMessage());
+           }
 
 //        }
 
@@ -392,15 +551,24 @@ public class ManageDoctorPane extends javax.swing.JPanel {
         }
        
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
-//        Employee emp = (Employee) model.getValueAt(selectedRowIndex,0);
-        int cityIndex = cityCombobox.getSelectedIndex();
-        int hospitalIndex = hospitalCombobox.getSelectedIndex();
         ArrayList<MainModel> mainM = history.getHistory();
+                    int index = 0;
+                    for(int i =0;i<mainM.size();i++){
+                        if(mainM.get(i).getCity()!=null){
+                            if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                                index = i;
+                                break;
+                        }
+                    }
+                    }
+        int cityIndex = index;
+        int hospitalIndex = hospitalCombobox.getSelectedIndex();
+//        ArrayList<MainModel> mainM = history.getHistory();
         updateName.setText(mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).getDoctorName());
         userIdLabel.setText(mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).getDoctorUserId());
         updateAddress.setText(mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).getDoctorAddress());
-        updateContact.setText((model.getValueAt(selectedRowIndex, 2)).toString());
-//        updatePass.setText(mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).();
+        updateContact.setText((model.getValueAt(selectedRowIndex, 3)).toString());
+
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -411,43 +579,97 @@ public class ManageDoctorPane extends javax.swing.JPanel {
         }
        
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
-//        Employee emp = (Employee) model.getValueAt(selectedRowIndex,0);
-        int cityIndex = cityCombobox.getSelectedIndex();
-        int hospitalIndex = hospitalCombobox.getSelectedIndex();
         ArrayList<MainModel> mainM = history.getHistory();
-        history.deleteDoctor();
-        MainModel mainModel = mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).remove(cityIndex,hospitalIndex,selectedRowIndex);
+                    int index = 0;
+                    for(int i =0;i<mainM.size();i++){
+                        if(mainM.get(i).getCity()!=null){
+                            if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                                index = i;
+                                break;
+                        }
+                    }
+                    }
+        int cityIndex = index;
+        int hospitalIndex = hospitalCombobox.getSelectedIndex();
+ 
+//        history.deleteDoctor();
+            mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).deleteDoctor(cityIndex,hospitalIndex,selectedRowIndex,history);
+//        MainModel mainModel = mainM.get(cityIndex).getHospitalArray().get(hospitalIndex).getDoctorArray().get(selectedRowIndex).remove(cityIndex,hospitalIndex,selectedRowIndex);
         displayDoctor(cityIndex,hospitalIndex);
 //        model.removeRow(doctorTable.getSelectedRow());
-        JOptionPane.showMessageDialog(this, "Employee deleted.");
+        JOptionPane.showMessageDialog(this, "Doctor deleted.");
                 // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void hospitalComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hospitalComboboxActionPerformed
          if(cityCombobox.getSelectedIndex()!=-1 && hospitalCombobox.getSelectedIndex()!=-1){
-            displayDoctor(cityCombobox.getSelectedIndex(),hospitalCombobox.getSelectedIndex());
+             ArrayList<MainModel> mainM = history.getHistory();
+                    int index = 0;
+                    for(int i =0;i<mainM.size();i++){
+                        if(mainM.get(i).getCity()!=null){
+                            if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                                index = i;
+                                break;
+                        }
+                    }
+                    }
+            displayDoctor(index,hospitalCombobox.getSelectedIndex());
 
             
         }
     }//GEN-LAST:event_hospitalComboboxActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        try
+        {
+        FieldsValidation fv = new FieldsValidation();
         String Name = updateName.getText();
         String Address = updateAddress.getText();
         long Contact = Long.parseLong(updateContact.getText());
         String DoctorUserId = userIdLabel.getText();
-        String DoctorUserPass = updatePass.getText();
+        
         String City = (String) cityCombobox.getSelectedItem();
         String Hospital = (String) hospitalCombobox.getSelectedItem();
-        int i = cityCombobox.getSelectedIndex();
+        ArrayList<MainModel> mainM = history.getHistory();
+                    int index = 0;
+                    for(int i =0;i<mainM.size();i++){
+                        if(mainM.get(i).getCity()!=null){
+                            if(mainM.get(i).getCity().equals(cityCombobox.getSelectedItem())){
+                                index = i;
+                                break;
+                        }
+                    }
+                    }
+        int i = index;
         int j = hospitalCombobox.getSelectedIndex();
         
-        ArrayList<MainModel> mainM = history.getHistory();
+        
         for(int k =0;k<mainM.size();k++){
             if(DoctorUserId.equals(mainM.get(i).getPersonId())){
                 mainM.get(i).setPersonName(Name);
             }
         }
+        if(Name.equals("") || Address.equals("") || String.valueOf(Contact).equals("")
+            )
+           {
+               throw new Exception("Please fill all the fields");
+           }
+            
+           if(!fv.verifyName(Name)){
+               updateName.setText("");
+               throw new Exception("Please enter valid name");
+           }
+           
+           
+         
+           if(!fv.verifyAdress(Address)){
+               updateAddress.setText("");
+               throw new Exception("Please enter valid address");
+           }
+           if(!fv.verifyContact(Contact)){
+               updateContact.setText("");
+               throw new Exception("Please enter valid Contact");
+           }
         
         for(int z = 0;z< mainM.get(i).getHospitalArray().get(j).getDoctorArray().size();z++){
             if(mainM.get(i).getHospitalArray().get(j).getDoctorArray().get(z).getDoctorUserId().equals(DoctorUserId)){
@@ -460,15 +682,22 @@ public class ManageDoctorPane extends javax.swing.JPanel {
 //                    System.out.println(Name);
         
 //                    System.out.println(mainM.get(i).getHospitalArray().get(j).getDoctorArray().get(0).getDoctorName()+" "+i);
-        displayDoctor(cityCombobox.getSelectedIndex(),hospitalCombobox.getSelectedIndex());
+        displayDoctor(i,hospitalCombobox.getSelectedIndex());
+         
+           }catch(Exception e){              
+                System.out.println("!!!!!!Exception : " + e.getMessage()+ "!!!!!!!!!!");                   
+                JOptionPane.showMessageDialog(this, e.getMessage());
+           }
     }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void inpGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpGenderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_inpGenderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DOB;
+    private javax.swing.JLabel DOB1;
     private javax.swing.JButton addBtn;
     private javax.swing.JComboBox<String> cityCombobox;
     private javax.swing.JButton deleteBtn;
@@ -476,10 +705,14 @@ public class ManageDoctorPane extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> hospitalCombobox;
     private javax.swing.JTextField inpAddress;
     private javax.swing.JTextField inpContact;
+    private javax.swing.JTextField inpDob;
+    private javax.swing.JComboBox<String> inpGender;
     private javax.swing.JTextField inpName;
     private javax.swing.JTextField inpUserId;
+    private javax.swing.JPasswordField inpUserPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -490,38 +723,39 @@ public class ManageDoctorPane extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel password;
     private javax.swing.JTextField updateAddress;
     private javax.swing.JButton updateBtn;
     private javax.swing.JTextField updateContact;
     private javax.swing.JTextField updateName;
+    private javax.swing.JLabel userIdLabel;
     private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
     private void displayDoctor(int j,int k) {
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
         model.setRowCount(0);
         ArrayList<MainModel> mainM = history.getHistory();
-               
+        int perId =0;
               
         for (int i =0;i<mainM.get(j).getHospitalArray().get(k).getDoctorArray().size();i++){
           if(mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorName() != null){
-            Object[] row = new Object[3];
+            Object[] row = new Object[6];
+            for(int q =0 ;q<mainM.size();q++){
+                if(mainM.get(q).getPersonId()!=null){
+                if(mainM.get(q).getPersonId().equals(mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorUserId())){
+                    perId = q;
+                    
+                }
+            }
+            }
+            row[0] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorUserId();
+            row[1] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorName();
+            row[2] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorAddress();
+            row[3] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorContact();
+            row[4] = mainM.get(perId).getPersonDob();
+            row[5] = mainM.get(perId).getPersonGender();
             
-            
-            row[0] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorName();
-            row[1] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorAddress();
-            row[2] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorContact();
-            
-//            row[2] = MainM.getEmployeeID();
-//            row[3] = MainM.getAge();
-//            row[4] = emp.getGender();
-//            row[5] = emp.getStart_date();
-//            row[6] = emp.getLevel();
-//            row[7] = emp.getTeam_Info();
-//            row[8] = emp.getPosition_title();
-//            row[9] = emp.getCell_phone_number();
-//            row[10] = emp.getEmail_address();
-//            row[11] = emp.getPhoto();
+
 
             model.addRow(row);
            

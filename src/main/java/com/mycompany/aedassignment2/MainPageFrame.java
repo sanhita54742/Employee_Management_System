@@ -5,30 +5,54 @@
 package com.mycompany.aedassignment2;
 
 import java.util.ArrayList;
+import model.DoctorAction;
+import model.HospitalAction;
 import model.MainHistory;
 import model.MainModel;
 
 /**
  *
-
+ * @author Admin
  */
 public class MainPageFrame extends javax.swing.JFrame {
     MainHistory history;
     String[] cityarray = {"Boston","New York","Los Angeles"};
-    String[] userId = {"admin","patient1","patient2","doctor1","doctor2","community1","community2","hospitaladmin1","hospitaladmin2"};
-    String[] userName = {"admin","patient1","patient2","doctor1","doctor2","community1","community2","hospitaladmin1","hospitaladmin2"};
-    String[] userPass = {"12345","12345","12345","12345","12345","12345","12345","12345","12345"};
-    String[] userRole = {"SystemAdmin","Patient","Patient","Doctor","Doctor","CommunityAdmin","CommunityAdmin","HospitalAdmin","HospitalAdmin"};
+    String[] userId = {"admin","patient1","patient2","doctor1","doctor2","community1","community2"};
+    String[] userName = {"admin","patient1","patient2","doctor1","doctor2","community1","community2"};
+    String[] userPass = {"12345","12345","12345","12345","12345","12345","12345"};
+    String[] userRole = {"SystemAdmin","Patient","Patient","Doctor","Doctor","CommunityAdmin","CommunityAdmin"};
     String[] HospitalArray = {"Fortis Hospital","Apollo Hospital","Leelavati Hospital"};
+    String[] HospitalAddress = {"Left","Right","Top"};
+    
     String[] doctorCityArray = {"Boston","New York"};
     String[] doctorHospitalArray = {"Fortis Hospital","Apollo Hospital"};
-    String[] HospitaladminArray = {"Fortis Hospital","Apollo Hospital"};
+    String[] userAddress = {"Left","Right","Left","Right","Left","Right","Left"};
+    String[] userDob = {"20/2/2010","25/1/2000","22/2/2008","20/5/2010","20/2/2007","2/2/2002","5/6/2011"};
+    ArrayList<Long> userContact = new ArrayList();
+ 
+//    long[] userContact = new long[7] {'1234567980','1237894560','7894561230','8973214560','6542317890','1237890456','7564891230'};
+//    for(int z=0;z<7;z++){
+//        userContact[] = 
+//    };
+//    userContact[] = {1234567980,1237894560,7894561230,8973214560,6542317890,1237890456,7564891230};
+//    userContact[0] = Long.parseLong(1234567980);
+    String[] userGender = {"Male","Female","Male","Female","Male","Male","Female"};
+    String[] userCity = {"Boston","New York","Los Angeles","Boston","New York","Los Angeles","Boston"};
     
     /**
      * Creates new form MainLoginPage
      */
     public MainPageFrame() {
         initComponents();
+        
+            userContact.add(Long.parseLong("1234567980"));
+            userContact.add(Long.parseLong("1237894560"));
+            userContact.add(Long.parseLong("7894561230"));
+            userContact.add(Long.parseLong("8973214560"));
+            userContact.add(Long.parseLong("6542317890"));
+            userContact.add(Long.parseLong("1237890456"));
+            userContact.add(Long.parseLong("7564891230"));
+        
         history = new MainHistory();
         
         for(int i=0; i < cityarray.length;i++){
@@ -41,14 +65,10 @@ public class MainPageFrame extends javax.swing.JFrame {
         int Hospitaladmincount = 1;
         for(int i = 0 ; i< HospitalArray.length ; i++){
             ArrayList<MainModel> MainMo = history.getHistory();
-            MainModel mainmodel = MainMo.get(i).addNewHospital();
+            HospitalAction mainmodel = MainMo.get(i).addNewHospital();
             mainmodel.setHospitalName(HospitalArray[i]);
-            for(int k = 0; k<userId.length;k++){
-                if(userRole[i].equals("CommunityAdmin")){
-                mainmodel.setHospitalAdmin(userId[k]);
-                Hospitaladmincount++;
-            }
-            }
+            mainmodel.setHospitalAddress(HospitalAddress[i]);
+
             
         }
         int DoctorCount = 0;
@@ -59,14 +79,22 @@ public class MainPageFrame extends javax.swing.JFrame {
             MainMod.setPersonName(userName[i]);
             MainMod.setPersonPassword(userPass[i]);
             MainMod.setPersonRole(userRole[i]);
+            MainMod.setPersonCity(userCity[i]);
+            MainMod.setPersonAddress(userAddress[i]);
+            MainMod.setPersonDob(userDob[i]);
+            MainMod.setPersonContact(userContact.get(i));
+            MainMod.setPersonGender(userGender[i]);
+
             if(userRole[i] == "Doctor"){
                 
                 int z = findIndex(cityarray,doctorCityArray[DoctorCount]);
                 for(int t = 0;t<MainMo.get(z).getHospitalArray().size();t++ ){
                     if(MainMo.get(findIndex(cityarray,doctorCityArray[DoctorCount])).getHospitalArray().get(t).getHospitalName().equals(doctorHospitalArray[DoctorCount])){
-                MainModel mainmodel = MainMo.get(findIndex(cityarray,doctorCityArray[DoctorCount])).getHospitalArray().get(t).addNewDoctor();
+                DoctorAction mainmodel = MainMo.get(findIndex(cityarray,doctorCityArray[DoctorCount])).getHospitalArray().get(t).addNewDoctor();
                 mainmodel.setDoctorName(userName[i]);
                 mainmodel.setDoctorUserId(userId[i]);
+//                mainmodel.setDoctorContact(long.parseLong(userContact[i]));
+                mainmodel.setDoctorAddress(userAddress[i]);
                 DoctorCount ++ ;
                 }
                 }
@@ -99,9 +127,11 @@ public class MainPageFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
+        jSplitPane1.setBackground(new java.awt.Color(173, 226, 244));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(0, 255, 204));
+
+        jLabel3.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("HOSPITAL MANAGEMENT SYSTEM");
 
@@ -110,26 +140,28 @@ public class MainPageFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addGap(198, 198, 198)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 255, 204));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jLabel5.setBackground(new java.awt.Color(173, 226, 244));
+        jLabel5.setFont(new java.awt.Font("Bodoni MT", 3, 36)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("WELCOME");
 
+        jButton3.setFont(new java.awt.Font("Bodoni MT", 1, 14)); // NOI18N
         jButton3.setText("SIGN IN");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +169,7 @@ public class MainPageFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Bodoni MT", 1, 14)); // NOI18N
         jButton4.setText("SIGN UP");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,25 +182,27 @@ public class MainPageFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addGap(125, 125, 125)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -221,6 +256,10 @@ public class MainPageFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainPageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

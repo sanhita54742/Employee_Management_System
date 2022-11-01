@@ -4,16 +4,21 @@
  */
 package com.mycompany.aedassignment2;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
 import model.MainHistory;
+import model.MainModel;
 
 /**
  *
+ * @author Admin
  */
 public class CommunityOptionPane extends javax.swing.JPanel {
     MainHistory history;
     JSplitPane jSplitPane2;
-    
+    String SelectedCity;
     /**
      * Creates new form CommunityOptionPane
      */
@@ -21,6 +26,14 @@ public class CommunityOptionPane extends javax.swing.JPanel {
         initComponents();
         this.history = history;
         this.jSplitPane2 = jSplitPane;
+        cityCombobox.removeAllItems();
+        for(MainModel mainM : history.getHistory()){
+                if(mainM.getCity()!=null){
+                    cityCombobox.addItem(mainM.getCity());
+                }
+            }
+         
+       
     }
 
     /**
@@ -34,7 +47,7 @@ public class CommunityOptionPane extends javax.swing.JPanel {
 
         cityCombobox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        hospitalTable = new javax.swing.JTable();
+        communityTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,11 +60,17 @@ public class CommunityOptionPane extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        inpContact1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        inpDob = new javax.swing.JTextField();
+        inpGender = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        inpUid = new javax.swing.JLabel();
+        addCityField = new javax.swing.JTextField();
+        addCity = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
+        cityCombobox.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
         cityCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cityCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,28 +78,48 @@ public class CommunityOptionPane extends javax.swing.JPanel {
             }
         });
 
-        hospitalTable.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane1.setBackground(new java.awt.Color(0, 153, 153));
+
+        communityTable.setFont(new java.awt.Font("Charter", 0, 16)); // NOI18N
+        communityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "NAME", "ADDRESS", "CONTACT"
+                "UID", "NAME", "ADDRESS", "CONTACT", "DOB", "GENDER", "ROLE"
             }
         ));
-        jScrollPane1.setViewportView(hospitalTable);
+        jScrollPane1.setViewportView(communityTable);
 
-        jLabel1.setText("NAME:");
+        jLabel1.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Name");
 
-        jLabel2.setText("ADDRESS:");
+        jLabel2.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Address");
 
-        jLabel3.setText("DOB:");
+        jLabel3.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("DOB");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        inpName.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        inpName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        inpAddress.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        inpAddress.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        inpContact.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        inpContact.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        jLabel8.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("UPDATE DETAILS");
 
+        addBtn.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
         addBtn.setText("UPDATE");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +127,7 @@ public class CommunityOptionPane extends javax.swing.JPanel {
             }
         });
 
+        viewBtn.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
         viewBtn.setText("VIEW");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,195 +135,333 @@ public class CommunityOptionPane extends javax.swing.JPanel {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
         jLabel9.setText("SELECT CITY");
 
+        jLabel11.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Contact");
 
-        jLabel12.setText("GENDER:");
+        jLabel12.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("GENDER");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        inpDob.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        inpDob.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        inpGender.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        inpGender.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        jLabel4.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("UID");
+
+        inpUid.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        inpUid.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        addCityField.setFont(new java.awt.Font("Charter", 0, 16)); // NOI18N
+
+        addCity.setFont(new java.awt.Font("Bodoni MT", 0, 16)); // NOI18N
+        addCity.setText("ADD CITY");
+        addCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                addCityActionPerformed(evt);
             }
         });
+
+        jLabel10.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
+        jLabel10.setText("ADD NEW CITY");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 489, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(338, 338, 338)
+                                .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(270, 270, 270)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(inpGender))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(inpDob))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(inpContact))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(inpUid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(0, 295, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(addCityField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(addCity, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(78, 78, 78))
+                                    .addComponent(cityCombobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(338, 338, 338)
-                        .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(inpContact1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(inpContact))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(340, 340, 340)
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cityCombobox)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addCityField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addCity, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpUid, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(inpName)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inpContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inpContact1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
+                    .addComponent(inpDob, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inpGender, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cityComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityComboboxActionPerformed
-//        if(cityCombobox.getSelectedIndex()!=-1){
-//            ArrayList<MainModel> mainM = history.getHistory();
-//            hospitalCombobox.removeAllItems();
-//
-//            int Flag = 0;
-//            int j = cityCombobox.getSelectedIndex();
-//            for (int i =0;i<mainM.get(j).getHospitalArray().size();i++){
-//
-//                hospitalCombobox.addItem(mainM.get(j).getHospitalArray().get(i).getHospitalName());
-//
-//            }
-//            if(hospitalCombobox.getSelectedIndex()!=-1){
-//                displayDoctor(cityCombobox.getSelectedIndex(),hospitalCombobox.getSelectedIndex());
-//            }
-//
-//        }
+        
+        if(cityCombobox.getSelectedItem()!=null){
+            System.out.println(cityCombobox.getSelectedItem().toString());
+            this.SelectedCity =cityCombobox.getSelectedItem().toString();
+            displayCommunity(SelectedCity);
+        }
+        
     }//GEN-LAST:event_cityComboboxActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-//        String Name = inpName.getText();
-//        //        String Address = inpAddress.getText();
-//        //        long Contact = Long.parseLong(inpContact.getText());
-//        String City = (String) cityCombobox.getSelectedItem();
-//        String Hospital = (String) hospitalCombobox.getSelectedItem();
-//        int i = cityCombobox.getSelectedIndex();
-//        int j = hospitalCombobox.getSelectedIndex();
-//        ArrayList<MainModel> mainM = history.getHistory();
-//
-//        //        System.out.println(mainM.size());
-//        int Flag = 0;
-//        //        for(int i = 0;i<mainM.size();i++){
-//            if(mainM.get(i).getCity() == cityCombobox.getSelectedItem().toString() && mainM.get(i).getHospitalArray().get(j).getHospitalName() == hospitalCombobox.getSelectedItem().toString()){
-//                System.out.println(mainM.get(i).getCity());
-//                mainM.get(i).getHospitalArray();
-//                for(int k =0 ; k < mainM.get(i).getHospitalArray().size();k++){
-//
-//                    if(mainM.get(i).getHospitalArray().get(k).getHospitalName().equals(Name)){
-//                        Flag = 1;
-//
-//                    }
-//                }
-//                if(Flag == 0){
-//
-//                    MainModel mainMo = mainM.get(i).getHospitalArray().get(j).addNewDoctor();
-//                    System.out.println(Name);
-//                    mainMo.setDoctorName(Name);
-//                    //                    mainMo.setHospitalContact(Contact);
-//                    //                    mainMo.setHospitalAddress(Address);
-//                    //                    System.out.println(mainM.get(i).getHospitalArray().get(j).getDoctorArray().get(0).getDoctorName()+" "+i);
-//                    displayDoctor(cityCombobox.getSelectedIndex(),hospitalCombobox.getSelectedIndex());
-//
-//                }
-//                else{
-//                    System.out.println("Hospital Already Exists");
-//                }
-//                //                break;
-//            }
-
-            //        }
+          try{
+            FieldsValidation fv = new FieldsValidation();
+            String Uid = inpUid.getText();
+            String Name = inpName.getText();
+            String Address = inpAddress.getText();
+            long Contact = Long.parseLong(inpContact.getText());
+            String Dob = inpDob.getText();
+            String Gender = inpGender.getText();
+            ArrayList<MainModel> mainM = history.getHistory();
+            if(Name.equals("") || Address.equals("") || String.valueOf(Contact).equals("") || Dob.equals("") || Gender.equals("") )
+           {
+               throw new Exception("Please fill all the details");
+           }
+            
+           if(!fv.verifyName(Name)){
+               inpName.setText("");
+               throw new Exception("Please enter valid name");
+           }
+           
+           if(!fv.verifyContact(Contact)){
+               inpContact.setText("");
+               throw new Exception("Please enter valid contact no");
+           }
+           
+           if(!fv.verifyAdress(Address)){
+               inpAddress.setText("");
+               throw new Exception("Please enter valid address");
+           }
+            for(int i =0;i<mainM.size();i++){
+                
+              if(mainM.get(i).getPersonId() != null && mainM.get(i).getPersonId() == Uid){
+                  
+                  mainM.get(i).setPersonName(Name);
+                  mainM.get(i).setPersonAddress(Address);
+                  mainM.get(i).setPersonContact(Contact);
+                  mainM.get(i).setPersonDob(Dob);
+                  mainM.get(i).setPersonGender(Gender);
+                  break;
+              }
+            }
+        displayCommunity(SelectedCity);
+        
+            
+        }
+        catch(Exception e){            
+                    System.out.println("!!!!!!Exception : " + e.getMessage()+ "!!!!!!!!!!");                   
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+        }        
+            
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
-        // TODO add your handling code here:
+        ArrayList<MainModel> mainM = history.getHistory();
+        
+        int selectedRowIndex = communityTable.getSelectedRow();
+        if (selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to delete.");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) communityTable.getModel();      
+        for(int i =0;i<mainM.size();i++){
+          if(mainM.get(i).getPersonId() != null && mainM.get(i).getPersonCity() == SelectedCity){
+           
+            if((model.getValueAt(selectedRowIndex, 0)).toString()!=null || (model.getValueAt(selectedRowIndex, 1)).toString()!=null || (model.getValueAt(selectedRowIndex, 2)).toString()!=null || (model.getValueAt(selectedRowIndex, 3)).toString()!=null || (model.getValueAt(selectedRowIndex, 4)).toString()!=null || (model.getValueAt(selectedRowIndex, 5)).toString()!=null){
+            inpUid.setText((model.getValueAt(selectedRowIndex, 0)).toString());
+            inpName.setText((model.getValueAt(selectedRowIndex, 1)).toString());
+            inpAddress.setText((model.getValueAt(selectedRowIndex, 2)).toString());
+            inpContact.setText((model.getValueAt(selectedRowIndex, 3)).toString());
+            inpDob.setText((model.getValueAt(selectedRowIndex, 4)).toString());
+            inpGender.setText((model.getValueAt(selectedRowIndex, 5)).toString());
+            
+            }
+            
+
+
+           
+            }
+        }
     }//GEN-LAST:event_viewBtnActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void addCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCityActionPerformed
+        int Flag = 0;
+        System.out.println("hi");
+        String city = addCityField.getText();
+        ArrayList<MainModel> mainMod = history.getHistory();
+        for(int i =0; i<mainMod.size();i++){
+            if(mainMod.get(i).getCity()!=null){
+                if(mainMod.get(i).getCity().equals(city)){
+                    Flag =1;
+            }
+            }
+        }
+        if(Flag == 0){
+            MainModel mainM = history.addNewCity();
+            
+            mainM.setCity(city);
+            if(cityCombobox.getSelectedItem()!=null){
+            cityCombobox.removeAllItems();
+            for(MainModel mainModel : history.getHistory()){
+                if(mainModel.getCity()!=null){
+                    cityCombobox.addItem(mainModel.getCity());
+                }
+            }
+            addCityField.setText("");
+            JOptionPane.showMessageDialog(this, "CITY ADDED");
+        }
+        }
+        
+    }//GEN-LAST:event_addCityActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton addCity;
+    private javax.swing.JTextField addCityField;
     private javax.swing.JComboBox<String> cityCombobox;
-    private javax.swing.JTable hospitalTable;
+    private javax.swing.JTable communityTable;
     private javax.swing.JTextField inpAddress;
     private javax.swing.JTextField inpContact;
-    private javax.swing.JTextField inpContact1;
+    private javax.swing.JTextField inpDob;
+    private javax.swing.JTextField inpGender;
     private javax.swing.JTextField inpName;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel inpUid;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
+private void displayCommunity(String city) {
+        DefaultTableModel model = (DefaultTableModel) communityTable.getModel();
+        model.setRowCount(0);
+        ArrayList<MainModel> mainM = history.getHistory();
+        
+            
+              
+        for(int i =0;i<mainM.size();i++){
+            if(mainM.get(i).getPersonCity()!=null){
+          if(mainM.get(i).getPersonId() != null && mainM.get(i).getPersonCity().equals(city)){
+            Object[] row = new Object[7];
+              System.out.println(mainM.get(i).getPersonCity()+"+"+city);
+            row[0] = mainM.get(i).getPersonId();
+            row[1] = mainM.get(i).getPersonName();
+            row[2] = mainM.get(i).getPersonAddress();
+            row[3] = mainM.get(i).getPersonContact();
+            row[4] = mainM.get(i).getPersonDob();
+            row[5] = mainM.get(i).getPersonGender();
+            row[6] = mainM.get(i).getPersonRole();
+//            row[6] = mainM.get(i).getPersonAddress();
+            
+            
+//            row[2] = mainM.get(j).getHospitalArray().get(k).getDoctorArray().get(i).getDoctorContact();
+            
+
+
+            model.addRow(row);
+           
+            }
+        }
+        }
+
+    }
+
 }

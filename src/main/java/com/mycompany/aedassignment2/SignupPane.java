@@ -13,14 +13,17 @@ import model.MainHistory;
 import model.MainModel;
 import java.io.File;
 import java.io.FileWriter;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+
 /**
- 
+ *
+ * @author Admin
  */
 public class SignupPane extends javax.swing.JPanel {
     MainHistory history;
@@ -34,6 +37,15 @@ public class SignupPane extends javax.swing.JPanel {
         this.history = history;
         this.jSplitPane2 = jSplitPane1;
         this.cityArraySize = cityArraySize;
+        
+        cityCombobox.removeAllItems();
+        
+        for(MainModel mainM : history.getHistory()){
+            if(mainM.getCity()!=null){
+                cityCombobox.addItem(mainM.getCity());
+            }
+            
+            }
     }
 
     /**
@@ -48,23 +60,38 @@ public class SignupPane extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         inpUser = new javax.swing.JTextField();
-        inpPass = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        inpCnfPass = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         inpName = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cityCombobox = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        inpAddress = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        inpDob = new javax.swing.JTextField();
+        inpContact = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        inpGender = new javax.swing.JTextField();
+        inpPass = new javax.swing.JPasswordField();
+        inpCnfPass = new javax.swing.JPasswordField();
 
-        setBackground(new java.awt.Color(102, 255, 255));
+        setBackground(new java.awt.Color(0, 204, 204));
 
+        jLabel1.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         jLabel1.setText("Create USER ID:");
 
+        jLabel2.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         jLabel2.setText("Create PASSWORD:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        inpUser.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
         jLabel3.setText("HOSPITAL MANAGEMENT SYSTEM");
 
+        jButton1.setFont(new java.awt.Font("Bodoni MT", 1, 16)); // NOI18N
         jButton1.setText("SIGN UP");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,15 +99,48 @@ public class SignupPane extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         jLabel5.setText("Confirm PASSWORD:");
 
+        jLabel4.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         jLabel4.setText("Enter Full Name:");
 
+        inpName.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
         inpName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inpNameActionPerformed(evt);
             }
         });
+
+        jLabel6.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel6.setText("City");
+
+        cityCombobox.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        cityCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel7.setText("Address");
+
+        inpAddress.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel8.setText("DOB");
+
+        jLabel9.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel9.setText("Contact");
+
+        inpDob.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        inpContact.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+        jLabel10.setText("Gender");
+
+        inpGender.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        inpPass.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
+
+        inpCnfPass.setFont(new java.awt.Font("Charter", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -91,29 +151,47 @@ public class SignupPane extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cityCombobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inpAddress)
+                            .addComponent(inpDob)
+                            .addComponent(inpContact)
                             .addComponent(inpUser)
+                            .addComponent(inpName)
                             .addComponent(inpPass)
-                            .addComponent(inpCnfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                            .addComponent(inpName)))
+                            .addComponent(inpCnfPass)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(inpGender, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(138, 138, 138))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inpName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,28 +201,79 @@ public class SignupPane extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inpPass, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inpPass)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inpCnfPass)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(inpCnfPass))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpDob, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpContact, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpGender, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cityCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       try
+        {
+            
+        FieldsValidation fv = new FieldsValidation();
         String Name = inpName.getText();
         String UserId = inpUser.getText();
         String Pass = inpPass.getText();
         String CnfPass = inpCnfPass.getText();
-        String City;
+        String address = inpAddress.getText();
+        long contact = Long.parseLong(inpContact.getText());
+        String dob = inpDob.getText();
+        String gender = inpGender.getText();
+        String city = cityCombobox.getSelectedItem().toString();
+        
+        
         String Role;
         int Flag = 0;
         ArrayList<MainModel> mainM = history.getHistory();
         ArrayList<MainModel> cityArray = new ArrayList();
+        
+        if(Name.equals("") || address.equals("") || String.valueOf(contact).equals("") || UserId.equals("") || Pass.equals("") || CnfPass.equals("") || dob.equals("") || gender.equals("") || city.equals(""))
+           {
+               throw new Exception("Please fill all the details");
+           }
+            
+           if(!fv.verifyName(Name)){
+               inpName.setText("");
+               throw new Exception("Please enter valid name");
+           }
+           
+           if(!fv.verifyContact(contact)){
+               inpContact.setText("");
+               throw new Exception("Please enter valid contact no");
+           }
+           
+           if(!fv.verifyAdress(address)){
+               inpAddress.setText("");
+               throw new Exception("Please enter valid address");
+           }
+//
         
 //         = new ArrayList();
         if(Pass.equals(CnfPass)){
@@ -152,74 +281,51 @@ public class SignupPane extends javax.swing.JPanel {
                 cityArray = mainM.get(i).getPersonArray();
                 for (int j = 0;j<cityArray.size();j++ ){
                     if(cityArray.get(j).getPersonId() == UserId){
-                        System.out.println("User Already Exists");
+                        JOptionPane.showMessageDialog(this, "USER ALREADY EXISTS");
                         Flag = 1;
-                        break;
+                        return;
+                        
+                     
                     }
                     
             }
         }
             if(Flag == 0){
                 MainModel mainMo = history.addNewPerson();
+//                MainModel mainMo = history.addNewPerson();
                 mainMo.setPersonName(Name);
                 mainMo.setPersonRole("Patient");
                 mainMo.setPersonId(UserId);
                 mainMo.setPersonPassword(Pass);
+                mainMo.setPersonAddress(address);
+                mainMo.setPersonContact(contact);
+                mainMo.setPersonDob(dob);
+                mainMo.setPersonGender(gender);
+                mainMo.setPersonCity(city);
                 MainModel mainModel = history.addNewSession();
                 mainModel.setSessionName(Name);
                 mainModel.setSessionRole("Patient");
                 mainModel.setSessionId(UserId);
                 mainModel.setSessionPass(Pass);
+                mainModel.setSessionAddress(address);
+                mainModel.setSessionContact(contact);
+                mainModel.setSessionDob(dob);
+                mainModel.setSessionGender(gender);
                 
                 
                 PatientOptionPane obj = new PatientOptionPane(history,jSplitPane2);
                 jSplitPane2.setRightComponent(obj);
                 LogoutPane obj1 = new LogoutPane(history,jSplitPane2,cityArraySize);
                 jSplitPane2.setLeftComponent(obj1);
-//                ArrayList<MainModel> mainMod = history.getHistory();
+//                
                 
-//                String json = new Gson().toJson(mainMod);
-//                System.out.println(json);
-//                Gson gson = new Gson();
-//                MainModel mainModel = gson.fromJson(json,MainModel.class);
-//                System.out.println(mainModel);
-//                System.out.println();
-//                System.out.println(ArrayListToHashMap(mainM));   
-//        String key = "key1"; //whatever
-//
-//        JSONObject jo = new JSONObject("{key1:\"val1\"}");
-//        //Read from file
-//        ObjectMapper mapper = new ObjectMapper();
-//        JSONObject root = null;
-//                try {
-//                    root = mapper.readValue(new File("E:\\JAVA\\aedass2dummy-main\\src\\main\\java\\com\\mycompany\\aedassignment2\\json_file.json"), JSONObject.class);
-//                } catch (IOException ex) {
-//                    Logger.getLogger(SignupPane.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//        String val_newer = jo.getString(key);
-//        String val_older = root.getString(key);
-//                System.out.println(val_older);
-//        //Compare values
-//        if(!val_newer.equals(val_older))
-//        {
-//            System.out.println(root.toString());
-//          //Update value in object
-//           root.put(key,val_newer);
-//
-//           //Write into the file
-//            try (FileWriter file = new FileWriter("E:\\JAVA\\aedass2dummy-main\\src\\main\\java\\com\\mycompany\\aedassignment2\\json_file.json")) 
-//            {
-//                file.write(root.toString());
-//                file.flush();
-//                System.out.println("Successfully updated json object to file...!!"+root.toString());
-//            } catch (IOException ex) {
-//                Logger.getLogger(SignupPane.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
 
                 System.out.println("PersonAdded");
             }
+        }
+        }catch(Exception e){
+                    System.out.println("!!!!!!Exception : " + e.getMessage()+ "!!!!!!!!!!");                   
+                    JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -229,16 +335,26 @@ public class SignupPane extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField inpCnfPass;
+    private javax.swing.JComboBox<String> cityCombobox;
+    private javax.swing.JTextField inpAddress;
+    private javax.swing.JPasswordField inpCnfPass;
+    private javax.swing.JTextField inpContact;
+    private javax.swing.JTextField inpDob;
+    private javax.swing.JTextField inpGender;
     private javax.swing.JTextField inpName;
-    private javax.swing.JTextField inpPass;
+    private javax.swing.JPasswordField inpPass;
     private javax.swing.JTextField inpUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 public static ArrayList<Component> getAllComponents(final Container c) {
     Component[] comps = c.getComponents();
